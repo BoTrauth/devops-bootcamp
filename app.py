@@ -4,7 +4,6 @@ import os
 app = Flask(__name__)
 
 # VULNERABILITY: Hardcoded secret!
-AWS_ACCESS_KEY = "AKIA1234567890123456" 
 
 @app.route('/')
 def hello():
