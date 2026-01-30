@@ -19,6 +19,26 @@ pipeline {
             }
         }
 
+        stage('Security: SAST (Code)') {
+            steps {
+                echo 'Running Bandit Static Analysis...'
+                // -r: recursive, -ll: severity level (medium/high), -ii: confidence level
+                // We permit exit code 1 so we can see the logs, 
+                // but usually you want to fail immediately.
+                sh 'bandit -r . -ll -ii || true' 
+            }
+        }
+
+        stage('Security: SCA (Dependencies)') {
+            steps {
+                echo 'Running Trivy Filesystem Scan...'
+                // Scans requirements.txt and OS packages
+                // --exit-code 1 means "Fail the build if vulnerabilities found"
+                // --severity HIGH,CRITICAL means ignore low-level stuff
+                sh 'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
