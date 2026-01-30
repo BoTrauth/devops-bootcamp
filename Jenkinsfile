@@ -6,7 +6,7 @@ pipeline {
            DEFINE YOUR VARIABLES HERE.
            Replace this URL with the output from your Terraform run.
         */
-        REGISTRY = '123456789012.dkr.ecr.us-east-1.amazonaws.com/my-flask-app'
+        REGISTRY = '743298170844.dkr.ecr.us-east-1.amazonaws.com/my-flask-app'
         REGION = 'us-east-1'
         IMAGE_TAG = "${BUILD_NUMBER}" 
     }
